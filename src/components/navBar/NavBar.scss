@@ -1,0 +1,35 @@
+.navWrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  .navBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid rgb(239, 241, 247);
+    .linkContainer {
+      display: flex;
+      gap: 28px;
+    }
+    @media screen and (max-width: 768px) {
+      .linkContainer {
+        display: none;
+      }
+      .signIn {
+        display: none;
+      }
+      .localCafe {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .hamburger {
+        display: none;
+        padding-right: 30px;
+      }
+    }
+  }
+}

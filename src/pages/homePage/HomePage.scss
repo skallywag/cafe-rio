@@ -1,11 +1,4 @@
 .homePage {
   padding: 40px 20px;
   background-color: rgb(241, 246, 247);
-  .test {
-    display: grid;
-    justify-items: center;
-    grid-template-rows: 1fr;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
 }

@@ -1,8 +1,11 @@
+@import "../../styles/themes.module.scss";
+
 .navWrapper {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
+  background-color: $white;
   .navBar {
     display: flex;
     justify-content: space-between;

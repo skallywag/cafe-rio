@@ -1,6 +1,6 @@
 import { HomeCarousel } from "../../components/homeCarousel/HomeCarousel";
 import { NewsCard } from "../../components/newsCard/NewsCard";
-import { fakeNewsData } from "../../fakeData/newsCardData";
+import { fakeNewsData } from "../../fakeData/newsData/newsCardData";
 import "./HomePage.scss";
 
 const HomePage: React.FC = () => {

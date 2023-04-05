@@ -1,2 +1,10 @@
 .homePage {
+  padding: 40px 20px;
+  background-color: rgb(241, 246, 247);
+  .newsContainer {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(164px, 1fr));
+    gap: 28px;
+  }
 }

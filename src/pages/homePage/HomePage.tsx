@@ -5,11 +5,11 @@ import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="page">
+    <div className="homePage">
       <div style={{ marginBottom: "40px" }}>
         <HomeCarousel />
       </div>
-      <div className="test">
+      <div className="newsContainer">
         {fakeNewsData.map((item) => {
           return (
             <NewsCard

@@ -18,7 +18,7 @@ const NavBar: React.FC<NavBarProps> = () => {
           </h4>
         </div>
         <div className="linkContainer">
-          <a onClick={() => router.navigate("")}>Order</a>
+          <a onClick={() => router.navigate("/create-order")}>Order</a>
           <a>Catering</a>
           <a>My Rio Rewards</a>
           <a>Gift Cards</a>

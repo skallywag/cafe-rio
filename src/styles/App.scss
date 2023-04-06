@@ -1,3 +1,7 @@
+@import "./reset.scss";
+@import "./themes.module.scss";
+@import "./_global";
+
 .App {
   height: 100%;
   .page {

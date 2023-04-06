@@ -32,9 +32,9 @@ const CreateOrderPage: React.FC = () => {
   return (
     <div className="createOrderPage">
       <div className="pageWrapper">
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           Tortilla
-        </h5>
+        </h3>
         <div className="optionSection">
           {tortillaItems.map((item) => {
             return (
@@ -54,9 +54,9 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           PROTEIN
-        </h5>
+        </h3>
         <div className="optionSection">
           {proteinItems.map((item) => {
             return (
@@ -76,9 +76,9 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           RICE
-        </h5>
+        </h3>
         <div className="optionSection">
           {riceItems.map((item) => {
             return (
@@ -94,9 +94,9 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           BEANS
-        </h5>
+        </h3>
         <div className="optionSection">
           {beansItems.map((item) => {
             return (
@@ -112,9 +112,9 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           SAUCE
-        </h5>
+        </h3>
         <div className="optionSection">
           {sauceItems.map((item) => {
             return (
@@ -130,9 +130,9 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h5 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           ENCHILADA STYLE
-        </h5>
+        </h3>
         <div className="optionSection">
           {enchiladaItems.map((item) => {
             return (

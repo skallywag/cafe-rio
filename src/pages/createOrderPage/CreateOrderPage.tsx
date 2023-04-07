@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useRef } from "react";
 import { OptionCard } from "../../components/orderOptionCard/OrderOptionCard";
 import { tortillaItems } from "../../fakeData/orderOptions/tortillaItems";
 import { riceItems } from "../../fakeData/orderOptions/riceItems";
@@ -17,6 +17,13 @@ const CreateOrderPage: React.FC = () => {
   const [sauceOption, setSauceOption] = useState("");
   const [enchiladaOption, setEnchiladaOption] = useState("");
 
+  const tortillaRef = useRef<null | HTMLHeadingElement>(null);
+  const proteinRef = useRef<null | HTMLHeadingElement>(null);
+  const riceRef = useRef<null | HTMLDivElement>(null);
+  const beansRef = useRef<null | HTMLDivElement>(null);
+  const sauceRef = useRef<null | HTMLHeadingElement>(null);
+  const enchiladaRef = useRef<null | HTMLDivElement>(null);
+
   function handleOptionSelect(
     option: string,
     currentOption: string,
@@ -31,8 +38,20 @@ const CreateOrderPage: React.FC = () => {
   }
   return (
     <div className="createOrderPage">
+      <div className="optionBar">
+        <h4 className="refLink">TORTILLA</h4>
+        <h4 className="refLink">PROTEIN</h4>
+        <h4 className="refLink">RICE</h4>
+        <h4 className="refLink">BEANS</h4>
+        <h4 className="refLink">SAUCE</h4>
+        <h4 className="refLink">ENCHILADA STYLE</h4>
+        <h4 className="refLink">CUSTOMIZE FURTHER</h4>
+      </div>
       <div className="pageWrapper">
-        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3
+          ref={tortillaRef}
+          style={{ marginBottom: "20px", color: themes.secondaryBlue }}
+        >
           Tortilla
         </h3>
         <div className="optionSection">
@@ -54,7 +73,10 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3
+          ref={proteinRef}
+          style={{ marginBottom: "20px", color: themes.secondaryBlue }}
+        >
           PROTEIN
         </h3>
         <div className="optionSection">
@@ -76,7 +98,10 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3
+          ref={riceRef}
+          style={{ marginBottom: "20px", color: themes.secondaryBlue }}
+        >
           RICE
         </h3>
         <div className="optionSection">
@@ -94,7 +119,10 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3
+          ref={beansRef}
+          style={{ marginBottom: "20px", color: themes.secondaryBlue }}
+        >
           BEANS
         </h3>
         <div className="optionSection">
@@ -112,7 +140,10 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
-        <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
+        <h3
+          ref={sauceRef}
+          style={{ marginBottom: "20px", color: themes.secondaryBlue }}
+        >
           SAUCE
         </h3>
         <div className="optionSection">
@@ -133,7 +164,7 @@ const CreateOrderPage: React.FC = () => {
         <h3 style={{ marginBottom: "20px", color: themes.secondaryBlue }}>
           ENCHILADA STYLE
         </h3>
-        <div className="optionSection">
+        <div ref={enchiladaRef} className="optionSection">
           {enchiladaItems.map((item) => {
             return (
               <OptionCard

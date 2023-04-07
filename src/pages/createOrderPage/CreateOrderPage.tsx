@@ -36,15 +36,31 @@ const CreateOrderPage: React.FC = () => {
     }
     setOption(option);
   }
+
+  function handleRefScroll(ref: React.RefObject<HTMLElement>) {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }
   return (
     <div className="createOrderPage">
       <div className="optionBar">
-        <h4 className="refLink">TORTILLA</h4>
-        <h4 className="refLink">PROTEIN</h4>
-        <h4 className="refLink">RICE</h4>
-        <h4 className="refLink">BEANS</h4>
-        <h4 className="refLink">SAUCE</h4>
-        <h4 className="refLink">ENCHILADA STYLE</h4>
+        <h4 onClick={() => handleRefScroll(tortillaRef)} className="refLink">
+          TORTILLA
+        </h4>
+        <h4 onClick={() => handleRefScroll(proteinRef)} className="refLink">
+          PROTEIN
+        </h4>
+        <h4 onClick={() => handleRefScroll(riceRef)} className="refLink">
+          RICE
+        </h4>
+        <h4 onClick={() => handleRefScroll(beansRef)} className="refLink">
+          BEANS
+        </h4>
+        <h4 onClick={() => handleRefScroll(sauceRef)} className="refLink">
+          SAUCE
+        </h4>
+        <h4 onClick={() => handleRefScroll(enchiladaRef)} className="refLink">
+          ENCHILADA STYLE
+        </h4>
         <h4 className="refLink">CUSTOMIZE FURTHER</h4>
       </div>
       <div className="pageWrapper">

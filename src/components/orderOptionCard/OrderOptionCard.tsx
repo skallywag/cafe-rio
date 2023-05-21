@@ -10,7 +10,7 @@ interface OptionCardProps {
 
 const OptionCard: React.FC<OptionCardProps> = (props) => {
   return (
-    <div className="optionCard" onClick={props.onClick}>
+    <div key={props.id} className="optionCard" onClick={props.onClick}>
       <img src={props.imageUrl} alt="tortilla" />
       {props.isSelected && (
         <img src="https://www.caferio.com/svg/item-select.svg" />

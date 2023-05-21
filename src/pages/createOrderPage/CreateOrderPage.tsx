@@ -6,6 +6,7 @@ import { beansItems } from "../../fakeData/orderOptions/beansItems";
 import { enchiladaItems } from "../../fakeData/orderOptions/enchiladaItems";
 import { sauceItems } from "../../fakeData/orderOptions/sauceItems";
 import { proteinItems } from "../../fakeData/orderOptions/proteinItems";
+import { SideBar } from "./sideBar/SideBar";
 import themes from "../../styles/themes.module.scss";
 import "./CreateOrderPage.scss";
 
@@ -36,6 +37,8 @@ const CreateOrderPage: React.FC = () => {
     }
     setOption(option);
   }
+
+  function handleAddToBag() {}
 
   function handleRefScroll(ref: React.RefObject<HTMLElement>) {
     ref.current?.scrollIntoView({ behavior: "smooth" });
@@ -199,6 +202,22 @@ const CreateOrderPage: React.FC = () => {
             );
           })}
         </div>
+        <SideBar
+          // orderStep={orderStep}
+          tortillaOption={tortillaOption}
+          proteinOption={proteinOption}
+          riceOption={riceOption}
+          beansOption={beansOption}
+          sauceOption={sauceOption}
+          enchiladaOption={enchiladaOption}
+          setTortillaOption={setTortillaOption}
+          setProteinOption={setProteinOption}
+          setBeansOption={setBeansOption}
+          setEnchiladaOption={setEnchiladaOption}
+          setRiceOption={setRiceOption}
+          setSauceOption={setSauceOption}
+          handleAddToBag={handleAddToBag}
+        />
       </div>
     </div>
   );

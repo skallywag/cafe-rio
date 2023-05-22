@@ -1,7 +1,7 @@
 import "./OrderOptionCard.scss";
 
 interface OptionCardProps {
-  id: number;
+  id: string;
   imageUrl: string;
   saleItem: string;
   isSelected: boolean;

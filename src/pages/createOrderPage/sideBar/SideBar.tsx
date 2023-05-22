@@ -1,4 +1,5 @@
 import { BsCheckCircle } from "react-icons/bs";
+import { ProgressBar } from "../../../components/progressBar/ProgressBar";
 import "./SideBar.scss";
 
 interface SideBarProps {
@@ -32,6 +33,13 @@ const SideBar: React.FC<SideBarProps> = (props) => {
           <span>Burrito</span>
           <span>$10.99</span>
         </div>
+        <ProgressBar
+          width={60}
+          height={60}
+          percentage={60}
+          strokeWidth={10}
+          orderStep={props.orderStep}
+        />
       </div>
       <div
         style={{

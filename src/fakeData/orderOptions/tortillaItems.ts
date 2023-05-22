@@ -1,4 +1,21 @@
-export const tortillaItems = [
-  { id: 1, saleItem: "Flour", imageUrl: "https://cdn.caferio.com/200045.jpg" },
-  { id: 2, saleItem: "Wheat", imageUrl: "https://cdn.caferio.com/200050.jpg" },
+import { nanoid } from "nanoid";
+import { Item } from "../../models";
+
+export type Tortilla = "Flour" | "Wheat";
+
+export type TortillaItem = Item<Tortilla>;
+
+export const tortillaItems: Array<TortillaItem> = [
+  {
+    id: nanoid(),
+    saleItem: "Flour",
+    category: "tortilla",
+    imageUrl: "https://cdn.caferio.com/200045.jpg",
+  },
+  {
+    id: nanoid(),
+    saleItem: "Wheat",
+    category: "tortilla",
+    imageUrl: "https://cdn.caferio.com/200050.jpg",
+  },
 ];

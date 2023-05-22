@@ -1,6 +1,9 @@
 import { useState, Dispatch, SetStateAction, useRef } from "react";
 import { OptionCard } from "../../components/orderOptionCard/OrderOptionCard";
-import { tortillaItems } from "../../fakeData/orderOptions/tortillaItems";
+import {
+  Tortilla,
+  tortillaItems,
+} from "../../fakeData/orderOptions/tortillaItems";
 import { riceItems } from "../../fakeData/orderOptions/riceItems";
 import { beansItems } from "../../fakeData/orderOptions/beansItems";
 import { enchiladaItems } from "../../fakeData/orderOptions/enchiladaItems";
@@ -9,8 +12,20 @@ import { proteinItems } from "../../fakeData/orderOptions/proteinItems";
 import { SideBar } from "./sideBar/SideBar";
 import themes from "../../styles/themes.module.scss";
 import "./CreateOrderPage.scss";
+import { Category } from "../../models";
 
 const CreateOrderPage: React.FC = () => {
+  const [options, setOptions] = useState<Record<Category, string | null>>({
+    tortilla: null,
+    protein: null,
+    rice: null,
+    beans: null,
+    sauce: null,
+    enchilada: null,
+  });
+
+  console.log(options);
+
   const [tortillaOption, setTortillaOption] = useState("");
   const [proteinOption, setProteinOption] = useState("");
   const [riceOption, setRiceOption] = useState("");
@@ -25,17 +40,15 @@ const CreateOrderPage: React.FC = () => {
   const sauceRef = useRef<null | HTMLHeadingElement>(null);
   const enchiladaRef = useRef<null | HTMLDivElement>(null);
 
-  function handleOptionSelect(
-    option: string,
-    currentOption: string,
-    setOption: Dispatch<SetStateAction<string>>
-  ) {
-    if (option === currentOption) {
-      setOption("");
+  function handleOptionSelect(optionCategory: Category, optionId: string) {
+    setOptions((prevOptions) => {
+      const previousOption = prevOptions[optionCategory];
 
-      return;
-    }
-    setOption(option);
+      return {
+        ...prevOptions,
+        [optionCategory]: previousOption === optionId ? null : optionId,
+      };
+    });
   }
 
   function handleAddToBag() {}
@@ -43,6 +56,7 @@ const CreateOrderPage: React.FC = () => {
   function handleRefScroll(ref: React.RefObject<HTMLElement>) {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }
+
   return (
     <div className="createOrderPage">
       <div className="optionBar">
@@ -80,14 +94,8 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={tortillaOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(
-                    item.saleItem,
-                    tortillaOption,
-                    setTortillaOption
-                  )
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => handleOptionSelect(item.category, item.id)}
               />
             );
           })}
@@ -105,14 +113,8 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={proteinOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(
-                    item.saleItem,
-                    proteinOption,
-                    setProteinOption
-                  )
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => handleOptionSelect(item.category, item.id)}
               />
             );
           })}
@@ -130,10 +132,19 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={riceOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(item.saleItem, riceOption, setRiceOption)
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => {
+                  // if (item.saleItem === "DOUBLE RICE, NO BEANS") {
+                  //   const noBeansItem = beansItems.find(
+                  //     (beanItem) => beanItem.saleItem === "NO BEANS"
+                  //   );
+
+                  //   if (!noBeansItem) return;
+
+                  //   handleOptionSelect("beans", noBeansItem.id);
+                  // }
+                  handleOptionSelect(item.category, item.id);
+                }}
               />
             );
           })}
@@ -151,10 +162,8 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={beansOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(item.saleItem, beansOption, setBeansOption)
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => handleOptionSelect(item.category, item.id)}
               />
             );
           })}
@@ -172,10 +181,8 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={sauceOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(item.saleItem, sauceOption, setSauceOption)
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => handleOptionSelect(item.category, item.id)}
               />
             );
           })}
@@ -190,14 +197,8 @@ const CreateOrderPage: React.FC = () => {
                 id={item.id}
                 imageUrl={item.imageUrl}
                 saleItem={item.saleItem}
-                isSelected={enchiladaOption === item.saleItem}
-                onClick={() =>
-                  handleOptionSelect(
-                    item.saleItem,
-                    enchiladaOption,
-                    setEnchiladaOption
-                  )
-                }
+                isSelected={options[item.category] === item.id}
+                onClick={() => handleOptionSelect(item.category, item.id)}
               />
             );
           })}

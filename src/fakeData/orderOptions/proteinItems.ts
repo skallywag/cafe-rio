@@ -62,12 +62,6 @@ export const proteinItems: Array<ProteinItem> = [
   {
     id: nanoid(),
     category: "protein",
-    saleItem: "ADD ANOTHER PROTEIN",
-    imageUrl: "https://cdn.caferio.com/customize/4728.jpg",
-  },
-  {
-    id: nanoid(),
-    category: "protein",
     saleItem: "EXTRA PROTEIN + 3.29",
     imageUrl: "https://www.caferio.com/images/brick-button-2x.jpg",
     additionalPrice: 3.29,

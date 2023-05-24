@@ -46,12 +46,6 @@ export const sauceItems: Array<SauceItem> = [
   {
     id: nanoid(),
     category: "sauce",
-    saleItem: "ADD MORE SAUCE",
-    imageUrl: "https://cdn.caferio.com/customize/4751.jpg",
-  },
-  {
-    id: nanoid(),
-    category: "sauce",
     saleItem: "SAUCE ON THE SIDE",
     imageUrl: "https://cdn.caferio.com/100586.jpg",
   },

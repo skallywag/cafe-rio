@@ -1,26 +1,32 @@
 import { BsCheckCircle } from "react-icons/bs";
 import { ProgressBar } from "../../../components/progressBar/ProgressBar";
+import themes from "../../../styles/themes.module.scss";
+import { Category } from "../../../models";
 import "./SideBar.scss";
 
 interface SideBarProps {
-  orderStep?: number;
-  itemTotal?: number;
-  tortillaOption: string;
-  proteinOption: string;
-  riceOption: string;
-  beansOption: string;
-  sauceOption: string;
-  enchiladaOption: string;
-  setTortillaOption: (option: string) => void;
-  setProteinOption: (option: string) => void;
-  setRiceOption: (option: string) => void;
-  setBeansOption: (option: string) => void;
-  setSauceOption: (option: string) => void;
-  setEnchiladaOption: (option: string) => void;
-  handleAddToBag: () => void;
+  options: Record<Category, string | null>;
+  items: (
+    | TortillaItem
+    | SauceItem
+    | BeansItem
+    | RiceItem
+    | EnchiladaItem
+    | ProteinItem
+  )[];
+  setOptions: React.Dispatch<
+    React.SetStateAction<Record<Category, string | null>>
+  >;
 }
 
-const SideBar: React.FC<SideBarProps> = (props) => {
+const SideBar: React.FC<SideBarProps> = ({ options, items, setOptions }) => {
+  const selectedTortilla = items.find((item) => item.id === options.tortilla);
+  const selectedProtein = items.find((item) => item.id === options.protein);
+  const selectedRice = items.find((item) => item.id === options.rice);
+  const selectedBeans = items.find((item) => item.id === options.beans);
+  const selectedSauce = items.find((item) => item.id === options.sauce);
+  const selectedEnchilada = items.find((item) => item.id === options.enchilada);
+
   return (
     <div className="sideBar">
       <div className="infoContainer">
@@ -33,13 +39,7 @@ const SideBar: React.FC<SideBarProps> = (props) => {
           <span>Burrito</span>
           <span>$10.99</span>
         </div>
-        <ProgressBar
-          width={60}
-          height={60}
-          percentage={60}
-          strokeWidth={10}
-          orderStep={props.orderStep}
-        />
+        <ProgressBar width={60} height={60} percentage={60} strokeWidth={10} />
       </div>
       <div
         style={{
@@ -51,77 +51,135 @@ const SideBar: React.FC<SideBarProps> = (props) => {
       >
         <div className="orderStep">
           <BsCheckCircle
-            color={props.tortillaOption ? "green" : ""}
+            color={options.tortilla ? themes.primaryGreen : ""}
             size={20}
           />
           <div>
             <span>Tortilla</span>
           </div>
         </div>
-        {props.tortillaOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.tortillaOption}</span>
-            <span onClick={() => props.setTortillaOption("")}>x</span>
-          </div>
-        )}
-        <div className="orderStep">
-          <BsCheckCircle color={props.proteinOption ? "green" : ""} size={20} />
-          <span>Protein</span>
-        </div>
-        {props.proteinOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.proteinOption}</span>
-            <span>x</span>
-          </div>
-        )}
-        <div className="orderStep">
-          <BsCheckCircle color={props.riceOption ? "green" : ""} size={20} />
-          <span onClick={() => props.setRiceOption("")}>Rice</span>
-        </div>
-        {props.riceOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.riceOption}</span>
-            <span>x</span>
-          </div>
-        )}
-        <div className="orderStep">
-          <BsCheckCircle color={props.beansOption ? "green" : ""} size={20} />
-          <span>Beans</span>
-        </div>
-        {props.beansOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.beansOption}</span>
-            <span onClick={() => props.setBeansOption("")}>x</span>
-          </div>
-        )}
-        <div className="orderStep">
-          <BsCheckCircle color={props.sauceOption ? "green" : ""} size={20} />
-          <span>Sauce</span>
-        </div>
-        {props.sauceOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.sauceOption}</span>
-            <span onClick={() => props.setSauceOption("")}>x</span>
+        {options.tortilla && (
+          <div className="selectedItem">
+            <span>{selectedTortilla.saleItem}</span>
+            <span
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, tortilla: null };
+                })
+              }
+            >
+              x
+            </span>
           </div>
         )}
         <div className="orderStep">
           <BsCheckCircle
-            color={props.enchiladaOption ? "green" : ""}
+            color={options.protein ? themes.primaryGreen : ""}
+            size={20}
+          />
+          <span>Protein</span>
+        </div>
+        {options.protein && (
+          <div className="selectedItem">
+            <span>{selectedProtein.saleItem}</span>
+            <span
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, protein: null };
+                })
+              }
+            >
+              x
+            </span>
+          </div>
+        )}
+        <div className="orderStep">
+          <BsCheckCircle
+            color={options.rice ? themes.primaryGreen : ""}
+            size={20}
+          />
+          <span>Rice</span>
+        </div>
+        {options.rice && (
+          <div className="selectedItem">
+            <span>{selectedRice.saleItem}</span>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, rice: null };
+                })
+              }
+            >
+              x
+            </span>
+          </div>
+        )}
+        <div className="orderStep">
+          <BsCheckCircle
+            color={options.beans ? themes.primaryGreen : ""}
+            size={20}
+          />
+          <span>Beans</span>
+        </div>
+        {options.beans && (
+          <div className="selectedItem">
+            <span>{selectedBeans.saleItem}</span>
+            <span
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, beans: null };
+                })
+              }
+            >
+              x
+            </span>
+          </div>
+        )}
+        <div className="orderStep">
+          <BsCheckCircle
+            color={options.sauce ? themes.primaryGreen : ""}
+            size={20}
+          />
+          <span>Sauce</span>
+        </div>
+        {options.sauce && (
+          <div className="selectedItem">
+            <span>{selectedSauce.saleItem}</span>
+            <span
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, sauce: null };
+                })
+              }
+            >
+              x
+            </span>
+          </div>
+        )}
+        <div className="orderStep">
+          <BsCheckCircle
+            color={options.enchilada ? themes.primaryGreen : ""}
             size={20}
           />
           <span>Enchilada Style</span>
         </div>
-        {props.enchiladaOption && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span>{props.enchiladaOption}</span>
-            <span onClick={() => props.setEnchiladaOption("")}>x</span>
+        {options.enchilada && (
+          <div className="selectedItem">
+            <span>{selectedEnchilada.saleItem}</span>
+            <span
+              onClick={() =>
+                setOptions((prevOptions: Record<Category, string | null>) => {
+                  return { ...prevOptions, enchilada: null };
+                })
+              }
+            >
+              x
+            </span>
           </div>
         )}
-        <div className="orderStep">
-          <BsCheckCircle size={20} />
-          <span>Customize Further</span>
-        </div>
-        <button onClick={props.handleAddToBag}>Add to Bag</button>
+
+        <button>Add to Bag</button>
       </div>
     </div>
   );

@@ -16,6 +16,15 @@
     justify-content: space-between;
     padding-right: 14px;
   }
+
+  .selectedItem {
+    display: flex;
+    justify-content: space-between;
+
+    span:nth-child(2) {
+      cursor: pointer;
+    }
+  }
   .orderStep {
     display: flex;
     align-items: center;

@@ -1,9 +1,6 @@
 import { useState, Dispatch, SetStateAction, useRef } from "react";
 import { OptionCard } from "../../components/orderOptionCard/OrderOptionCard";
-import {
-  Tortilla,
-  tortillaItems,
-} from "../../fakeData/orderOptions/tortillaItems";
+import { tortillaItems } from "../../fakeData/orderOptions/tortillaItems";
 import { riceItems } from "../../fakeData/orderOptions/riceItems";
 import { beansItems } from "../../fakeData/orderOptions/beansItems";
 import { enchiladaItems } from "../../fakeData/orderOptions/enchiladaItems";
@@ -24,15 +21,6 @@ const CreateOrderPage: React.FC = () => {
     enchilada: null,
   });
 
-  console.log(options);
-
-  const [tortillaOption, setTortillaOption] = useState("");
-  const [proteinOption, setProteinOption] = useState("");
-  const [riceOption, setRiceOption] = useState("");
-  const [beansOption, setBeansOption] = useState("");
-  const [sauceOption, setSauceOption] = useState("");
-  const [enchiladaOption, setEnchiladaOption] = useState("");
-
   const tortillaRef = useRef<null | HTMLHeadingElement>(null);
   const proteinRef = useRef<null | HTMLHeadingElement>(null);
   const riceRef = useRef<null | HTMLDivElement>(null);
@@ -51,7 +39,7 @@ const CreateOrderPage: React.FC = () => {
     });
   }
 
-  function handleAddToBag() {}
+  function handleAddToBag(options: {}) {}
 
   function handleRefScroll(ref: React.RefObject<HTMLElement>) {
     ref.current?.scrollIntoView({ behavior: "smooth" });
@@ -134,15 +122,20 @@ const CreateOrderPage: React.FC = () => {
                 saleItem={item.saleItem}
                 isSelected={options[item.category] === item.id}
                 onClick={() => {
-                  // if (item.saleItem === "DOUBLE RICE, NO BEANS") {
-                  //   const noBeansItem = beansItems.find(
-                  //     (beanItem) => beanItem.saleItem === "NO BEANS"
-                  //   );
+                  const doubleRiceNoBeansItem = riceItems.find(
+                    (riceItem) => riceItem.saleItem === "DOUBLE RICE, NO BEANS"
+                  );
 
-                  //   if (!noBeansItem) return;
+                  const noBeansItem = beansItems.find(
+                    (beanItem) => beanItem.saleItem === "NO BEANS"
+                  );
 
-                  //   handleOptionSelect("beans", noBeansItem.id);
-                  // }
+                  if (!noBeansItem || !doubleRiceNoBeansItem) return;
+
+                  if (item.id === doubleRiceNoBeansItem.id) {
+                    handleOptionSelect("beans", noBeansItem.id);
+                  }
+
                   handleOptionSelect(item.category, item.id);
                 }}
               />
@@ -204,20 +197,16 @@ const CreateOrderPage: React.FC = () => {
           })}
         </div>
         <SideBar
-          // orderStep={orderStep}
-          tortillaOption={tortillaOption}
-          proteinOption={proteinOption}
-          riceOption={riceOption}
-          beansOption={beansOption}
-          sauceOption={sauceOption}
-          enchiladaOption={enchiladaOption}
-          setTortillaOption={setTortillaOption}
-          setProteinOption={setProteinOption}
-          setBeansOption={setBeansOption}
-          setEnchiladaOption={setEnchiladaOption}
-          setRiceOption={setRiceOption}
-          setSauceOption={setSauceOption}
-          handleAddToBag={handleAddToBag}
+          options={options}
+          setOptions={setOptions}
+          items={[
+            ...tortillaItems,
+            ...sauceItems,
+            ...beansItems,
+            ...riceItems,
+            ...enchiladaItems,
+            ...proteinItems,
+          ]}
         />
       </div>
     </div>
